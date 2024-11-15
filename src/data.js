@@ -1,39 +1,39 @@
 export const teamData = [
     {
-        "name": "BetterUp Manage",
+        "name": "Acme Product",
         "type": "Stream-Aligned",
         "size": 4,
         "interactions": [
             {
-                "target": "DevSecOps",
+                "target": "Platform Infrastructure",
                 "type": "X-as-a-Service"
             }
         ]
     },
     {
-        "name": "BetterUp Lead",
+        "name": "Customer Analytics",
         "type": "Stream-Aligned",
         "size": 7,
         "interactions": [
             {
-                "target": "DevSecOps",
+                "target": "Platform Infrastructure",
                 "type": "X-as-a-Service"
             }
         ]
     },
     {
-        "name": "Direct to Consumer",
+        "name": "Payments",
         "type": "Stream-Aligned",
         "size": 9,
         "interactions": [
             {
-                "target": "DevSecOps",
+                "target": "Platform Infrastructure",
                 "type": "X-as-a-Service"
             }
         ]
     },
     {
-        "name": "DevSecOps",
+        "name": "Platform Infrastructure",
         "type": "Platform",
         "size": 10,
         "interactions": []
@@ -44,7 +44,7 @@ export const teamData = [
         "size": 4,
         "interactions": [
             {
-                "target": "Direct to Consumer",
+                "target": "Customer Analytics",
                 "type": "Facilitating"
             }
         ]
@@ -55,7 +55,7 @@ export const teamData = [
         "size": 4,
         "interactions": [
             {
-                "target": "Direct to Consumer",
+                "target": "Acme Product",
                 "type": "Collaborating"
             }
         ]
