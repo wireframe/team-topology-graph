@@ -20,12 +20,12 @@ function createVisualization() {
 
     // Helper function to scale node sizes
     function getNodeSize(teamSize) {
-        if (teamSize < 4) {
-            return 1;
+        if (teamSize < 5) {
+            return 8;
         } else if (teamSize <= 9) {
-            return 10;
+            return 15;
         } else {
-            return 30;
+            return 25;
         }
     }
 
