@@ -14,15 +14,15 @@ function createVisualization() {
     // Create a new graph instance
     const graph = new Graph();
 
+    // Calculate min and max team sizes for scaling
+    const minTeamSize = Math.min(...teamData.map(team => team.size));
+    const maxTeamSize = Math.max(...teamData.map(team => team.size));
+
     // Helper function to scale node sizes
     function getNodeSize(teamSize) {
-        if (teamSize < 4) {
-            return 10;
-        } else if (teamSize < 9) { 
-            return 50;
-        } else {
-            return 100;
-        }
+        const minNodeSize = 10;
+        const maxNodeSize = 30;
+        return minNodeSize + (teamSize - minTeamSize) * (maxNodeSize - minNodeSize) / (maxTeamSize - minTeamSize);
     }
 
     // Helper function to get node colors
@@ -46,16 +46,15 @@ function createVisualization() {
         return colors[type] || '#999';
     }
 
-    // Add nodes to the graph with dynamic sizing
+    // Add nodes to the graph
     teamData.forEach(team => {
         graph.addNode(team.name, {
             x: Math.random() * 100,
             y: Math.random() * 100,
-            size: getNodeSize(team.size),  // Dynamic size based on team size
-            label: team.name,
+            size: getNodeSize(team.size),
+            label: `${team.name} (${team.size})`,
             color: getColorByType(team.type),
             teamType: team.type,
-            // Add original team size for tooltip
             teamSize: team.size
         });
     });
@@ -64,11 +63,11 @@ function createVisualization() {
     teamData.forEach(team => {
         team.interactions.forEach(interaction => {
             graph.addEdge(team.name, interaction.target, {
-                size: 4,
+                size: 2,
                 label: interaction.type,
                 color: getEdgeColorByType(interaction.type),
                 type: 'arrow',
-                forceLabel: true,
+                forceLabel: true
             });
         });
     });
@@ -85,28 +84,18 @@ function createVisualization() {
     });
 
     try {
-        // Create the renderer with settings
+        // Create the renderer with simplified settings
         const renderer = new Sigma(graph, container, {
-            defaultNodeType: "circle",
-            defaultEdgeType: "arrow",
-            renderLabels: true,
-            renderEdgeLabels: true,
-            labelSize: 14,
-            labelWeight: "bold",
             minCameraRatio: 0.1,
             maxCameraRatio: 10,
+            labelSize: 14,
+            labelWeight: "bold",
             minArrowSize: 8,
             maxArrowSize: 12,
             edgeArrowSize: 8,
             edgeLineWidth: 2,
             edgeLabelSize: 12,
-            // Add hover effect to show team size
-            nodeReducer: (node, data) => ({
-                ...data,
-                highlighted: data.highlighted || false,
-                type: "circle",
-                label: `${data.label} (${data.teamSize})` // Add team size to label
-            })
+            renderEdgeLabels: true
         });
 
         // Add hover effects
