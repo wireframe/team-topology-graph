@@ -51,9 +51,11 @@ function createVisualization() {
     teamData.forEach(team => {
         team.interactions.forEach(interaction => {
             graph.addEdge(team.name, interaction.target, {
-                size: 1,
+                size: 4,
                 label: interaction.type,
-                color: getEdgeColorByType(interaction.type)
+                color: getEdgeColorByType(interaction.type),
+                type: 'arrow',
+                forceLabel: true,
             });
         });
     });
@@ -80,7 +82,10 @@ function createVisualization() {
             labelWeight: "bold",
             minCameraRatio: 0.1,
             maxCameraRatio: 10,
-            minArrowSize: 6,
+            minArrowSize: 8,
+            maxArrowSize: 12,
+            edgeArrowSize: 12,
+            edgeLineWidth: 4,
             edgeLabelSize: 12,
             nodeReducer: (node, data) => ({
                 ...data,
