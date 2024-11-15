@@ -14,13 +14,23 @@ export const teamData = [
         "name": "BetterUp Lead",
         "type": "Stream-Aligned",
         "size": 7,
-        "interactions": []
+        "interactions": [
+            {
+                "target": "DevSecOps",
+                "type": "X-as-a-Service"
+            }
+        ]
     },
     {
         "name": "Direct to Consumer",
         "type": "Stream-Aligned",
         "size": 4,
-        "interactions": []
+        "interactions": [
+            {
+                "target": "DevSecOps",
+                "type": "X-as-a-Service"
+            }
+        ]
     },
     {
         "name": "DevSecOps",
@@ -43,6 +53,11 @@ export const teamData = [
         "name": "Video platform",
         "type": "Complicated Subsystem",
         "size": 4,
-        "interactions": []
+        "interactions": [
+            {
+                "target": "Direct to Consumer",
+                "type": "Collaborating"
+            }
+        ]
     }
 ]; 
