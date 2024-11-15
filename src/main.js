@@ -159,7 +159,7 @@ function createVisualization() {
             const color = getColorByType(type);
             item.innerHTML = `
                 <span style="display: inline-block; width: 20px; height: 20px; background: ${color}; border-radius: 50%; margin-right: 8px; vertical-align: middle;"></span>
-                <span style="vertical-align: middle;">${type}</span>
+                <span style="vertical-align: middle;">${type} Teams</span>
             `;
             legend.appendChild(item);
         });
