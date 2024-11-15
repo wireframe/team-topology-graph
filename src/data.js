@@ -24,7 +24,7 @@ export const teamData = [
     {
         "name": "Direct to Consumer",
         "type": "Stream-Aligned",
-        "size": 4,
+        "size": 9,
         "interactions": [
             {
                 "target": "DevSecOps",

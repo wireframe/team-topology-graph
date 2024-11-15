@@ -20,9 +20,13 @@ function createVisualization() {
 
     // Helper function to scale node sizes
     function getNodeSize(teamSize) {
-        const minNodeSize = 10;
-        const maxNodeSize = 30;
-        return minNodeSize + (teamSize - minTeamSize) * (maxNodeSize - minNodeSize) / (maxTeamSize - minTeamSize);
+        if (teamSize < 4) {
+            return 1;
+        } else if (teamSize <= 9) {
+            return 10;
+        } else {
+            return 30;
+        }
     }
 
     // Helper function to get node colors
@@ -55,7 +59,11 @@ function createVisualization() {
             label: `${team.name} (${team.size})`,
             color: getColorByType(team.type),
             teamType: team.type,
-            teamSize: team.size
+            teamSize: team.size,
+            type: 'circle',
+            highlighted: false,
+            borderColor: '#fff',
+            borderWidth: 2
         });
     });
 
@@ -84,7 +92,7 @@ function createVisualization() {
     });
 
     try {
-        // Create the renderer with simplified settings
+        // Create the renderer with updated settings
         const renderer = new Sigma(graph, container, {
             minCameraRatio: 0.1,
             maxCameraRatio: 10,
@@ -95,7 +103,15 @@ function createVisualization() {
             edgeArrowSize: 8,
             edgeLineWidth: 2,
             edgeLabelSize: 12,
-            renderEdgeLabels: true
+            renderEdgeLabels: true,
+            defaultNodeType: 'circle',
+            defaultNodeColor: '#999',
+            nodeReducer: (node, data) => ({
+                ...data,
+                highlighted: data.highlighted || false,
+                color: data.highlighted ? data.color : data.color,
+                zIndex: data.highlighted ? 1 : 0
+            })
         });
 
         // Add hover effects
