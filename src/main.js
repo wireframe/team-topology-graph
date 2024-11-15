@@ -14,6 +14,17 @@ function createVisualization() {
     // Create a new graph instance
     const graph = new Graph();
 
+    // Helper function to scale node sizes
+    function getNodeSize(teamSize) {
+        if (teamSize < 4) {
+            return 10;
+        } else if (teamSize < 9) { 
+            return 50;
+        } else {
+            return 100;
+        }
+    }
+
     // Helper function to get node colors
     function getColorByType(type) {
         const colors = {
@@ -35,15 +46,17 @@ function createVisualization() {
         return colors[type] || '#999';
     }
 
-    // Add nodes to the graph
+    // Add nodes to the graph with dynamic sizing
     teamData.forEach(team => {
         graph.addNode(team.name, {
             x: Math.random() * 100,
             y: Math.random() * 100,
-            size: team.size * 3,
+            size: getNodeSize(team.size),  // Dynamic size based on team size
             label: team.name,
             color: getColorByType(team.type),
-            teamType: team.type
+            teamType: team.type,
+            // Add original team size for tooltip
+            teamSize: team.size
         });
     });
 
@@ -84,13 +97,15 @@ function createVisualization() {
             maxCameraRatio: 10,
             minArrowSize: 8,
             maxArrowSize: 12,
-            edgeArrowSize: 12,
-            edgeLineWidth: 4,
+            edgeArrowSize: 8,
+            edgeLineWidth: 2,
             edgeLabelSize: 12,
+            // Add hover effect to show team size
             nodeReducer: (node, data) => ({
                 ...data,
                 highlighted: data.highlighted || false,
-                type: "circle"
+                type: "circle",
+                label: `${data.label} (${data.teamSize})` // Add team size to label
             })
         });
 
