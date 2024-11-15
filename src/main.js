@@ -1,7 +1,7 @@
 import './style.css'
 import Graph from 'graphology';
 import Sigma from 'sigma';
-import forceAtlas2 from 'graphology-layout-forceatlas2';
+import ForceSupervisor from "graphology-layout-force/worker";
 import { teamData } from './data';
 
 // dyanmically set node size based on team size
@@ -76,18 +76,8 @@ function createVisualization() {
         });
     });
 
-    // Apply ForceAtlas2 layout
-    forceAtlas2.assign(graph, {
-        iterations: 50,
-        settings: {
-            gravity: 1,
-            scalingRatio: 2,
-            strongGravityMode: true,
-            slowDown: 10
-        }
-    });
 
-    // Create the renderer with updated settings
+    // Create the renderer
     const renderer = new Sigma(graph, container, {
         minCameraRatio: 0.1,
         maxCameraRatio: 10,
@@ -109,6 +99,10 @@ function createVisualization() {
         })
     });
 
+    // Create the spring layout and start it:
+    const layout = new ForceSupervisor(graph);
+    layout.start();
+    
     // Add hover effects
     let hoveredNode = null;
 
