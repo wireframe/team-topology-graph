@@ -67,7 +67,7 @@ function createVisualization() {
     teamData.forEach(team => {
         team.interactions.forEach(interaction => {
             graph.addEdge(team.name, interaction.target, {
-                size: 2,
+                size: 5,
                 label: interaction.type,
                 color: getEdgeColorByType(interaction.type),
                 type: 'arrow',
