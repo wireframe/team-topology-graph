@@ -6,6 +6,77 @@
     <title>Team Topology Visualization</title>
 </head>
 <body>
+    <details>
+        <summary>Teams Definition</summary>
+        <form id="teams-form">
+            <textarea id="teams-data">
+                [
+                {
+                    "name": "Acme Product",
+                    "type": "Stream-Aligned",
+                    "size": 4,
+                    "interactions": [
+                        {
+                            "target": "Platform Infrastructure",
+                            "type": "X-as-a-Service"
+                        }
+                    ]
+                },
+                {
+                    "name": "Customer Analytics",
+                    "type": "Stream-Aligned",
+                    "size": 7,
+                    "interactions": [
+                        {
+                            "target": "Platform Infrastructure",
+                            "type": "X-as-a-Service"
+                        }
+                    ]
+                },
+                {
+                    "name": "Payments",
+                    "type": "Stream-Aligned",
+                    "size": 9,
+                    "interactions": [
+                        {
+                            "target": "Platform Infrastructure",
+                            "type": "X-as-a-Service"
+                        }
+                    ]
+                },
+                {
+                    "name": "Platform Infrastructure",
+                    "type": "Platform",
+                    "size": 10,
+                    "interactions": []
+                },
+                {
+                    "name": "Core Systems",
+                    "type": "Enabling",
+                    "size": 4,
+                    "interactions": [
+                        {
+                            "target": "Customer Analytics",
+                            "type": "Facilitating"
+                        }
+                    ]
+                },
+                {
+                    "name": "Video platform",
+                    "type": "Complicated Subsystem",
+                    "size": 4,
+                    "interactions": [
+                        {
+                            "target": "Acme Product",
+                            "type": "Collaborating"
+                        }
+                    ]
+                }
+                ]
+            </textarea>
+            <button type="submit">Render teams graph</button>
+        </form>
+    </details>
     <div id="topology-container"></div>
     <script type="module" src="/src/main.js"></script>
 </body>

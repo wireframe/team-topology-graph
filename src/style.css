@@ -3,6 +3,13 @@ body {
     padding: 0;
 }
 
+#teams-form {
+    width: 100%;
+}
+#teams-data {
+    width: 80%;
+    height: 20em;
+}
 #topology-container {
     width: 100%;
     height: 100vh;

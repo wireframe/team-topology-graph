@@ -2,7 +2,7 @@ import './style.css'
 import Graph from 'graphology';
 import Sigma from 'sigma';
 import ForceSupervisor from "graphology-layout-force/worker";
-import { teamData } from './data';
+
 
 // dyanmically set node size based on team size
 function getNodeSize(teamSize) {
@@ -37,13 +37,14 @@ function getEdgeColorByType(type) {
 }
 
 // create the visualization
-function createVisualization() {
+function createVisualization(teamData) {
     const container = document.getElementById('topology-container');
     if (!container) {
         console.error('Container not found!');
         return;
     }
 
+    container.innerHTML = '';
     const graph = new Graph();
 
     // Add nodes to the graph
@@ -156,9 +157,15 @@ function createVisualization() {
     container.appendChild(legend);
 }
 
-// Wait for DOM to be ready
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', createVisualization);
-} else {
-    createVisualization();
-} 
+// update the graph when the dataset changes
+const form = document.getElementById('teams-form');
+form.addEventListener('submit', (event) => {
+    event.preventDefault();
+    try {
+        const textarea = document.getElementById('teams-data');
+        const inputData = JSON.parse(textarea.value);
+        createVisualization(inputData);
+    } catch (error) {
+        console.error('Invalid JSON input:', error);
+    }
+});
